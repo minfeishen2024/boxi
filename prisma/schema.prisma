@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String?
+  email String? @unique
+  emailVerified DateTime?
+  image String?
+  hashedPassword String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  favoriteIds String[] @db.ObjectId
+
+  accounts Account[]
+  listings Listing[]
+  reservations Reservation[]
+}
+
+model Account {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String? @db.String
+  access_token String? @db.String
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String? @db.String
+  session_state String?
+
+  user User @relation(fields: [userId], references:[id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
+
+
+//model that stores storage information, where user refers to the host
+model Listing {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  description String
+  imageSrc String
+  createdAt DateTime @default(now())
+  boxCount Int
+  address String
+  city String
+  state String
+  zipCode String
+  userId String @db.ObjectId
+  price Int
+  rating Float? @default(5)
+  safety Float? @default(5)
+  petFree Boolean
+  tempControlled Boolean
+  secureEntrance Boolean
+  latitude Float? @default(39.956740)
+  longitude Float? @default(-75.195270)
+  
+
+  user User @relation(fields:[userId], references:[id], onDelete: Cascade)
+  comments String[]
+  reservations Reservation[]
+}
+
+model Message {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  content String
+  createdAt DateTime @default(now())
+  authorId String @db.ObjectId
+  recipientId String @db.ObjectId
+}
+
+
+
+//Model that stores reservation info, where User refers to customer
+model Reservation {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  listingId String @db.ObjectId
+  startDate DateTime
+  endDate DateTime
+  numOfbox Int
+  totalPrice Int
+  createdAt DateTime @default(now())
+  status String @default("Waiting To Be Approved")
+  storeHazard Boolean? @default(false)
+  storePerishable Boolean? @default(false)
+  storeFlammable Boolean? @default(false)
+  user User @relation(fields:[userId], references:[id], onDelete: Cascade)
+  listing Listing @relation(fields:[listingId], references: [id], onDelete: Cascade)
+}
+
+model testModel{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  startDate DateTime
+}

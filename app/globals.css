@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  background: #FFFDFB
+}
+:root {
+  height: 100%;
+}
+
+
+
+
+
+.rdrMonth{
+  width: 100% !important
+}
+
+.rdrCalendarWrapper{
+  width: 100% !important;
+  font-size: 16px !important;
+}
+
+.rdrMonth{
+  width: 100% !important;
+  
+}
+
+.rdrCalendarWrapper {
+  width: 100% !important;
+  font-size: 16px !important;
+}
+
+.fullscreen-background {
+  background-image: url('/images/boxibackground.png'); /* Replace with your image path*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+  /* background: black; */
+  min-height: 100vh; /* Full viewport height */
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  
+}
+
+.fullscreen-map {
+  background-image: url('/images/mapScreenShot.png'); /* Replace with your image path*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+  /* background: black; */
+  min-height: 100vh; /* Full viewport height */
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  
+}
+
+.fullscreen-background-landing {
+  background-image: url('/images/boxilanding.png'); /* Replace with your image path*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+  /* background: black; */
+  min-height: 100vh; /* Full viewport height */
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  
+}
+
+.left-section,
+.right-section {
+  flex: 1; /* Both sections take equal width */
+  padding: 96px;
+}
+
+.left-section {
+    flex: 0 0 50%; /* Do not grow or shrink, start at 30% of the parent container's width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.right-section {
+  flex: 0 0 50%; /* Do not grow or shrink, start at 70% of the parent container's width */
+  padding: 20px;
+  /* Add any additional styles for the right section here */
+}
+
+.custom-header {
+  font-family: 'Bebas Neue'; 
+  font-size: 22px;
+}
+
+.custom-font-header {
+  font-family: 'YourFontName', sans-serif;
+}
